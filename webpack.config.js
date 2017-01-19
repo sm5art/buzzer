@@ -14,11 +14,11 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loaders: ['react-hot','style-loader']
+        loaders: ['style-loader']
       }, {
         test: /\.css$/,
         exclude: /node_modules/,
-        loaders: ['react-hot','css-loader'],
+        loaders: ['css-loader'],
       }
     ],
   },
