@@ -14,7 +14,7 @@ class Login extends Component {
 
   componentDidUpdate(){
     console.log(this.props.state)
-    if(this.props.state.id != undefined){
+    if(this.props.state.id != undefined && this.props.state.players[this.props.state.id] != undefined){
         browserHistory.push('/play');
     }
   }
