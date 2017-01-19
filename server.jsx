@@ -93,6 +93,6 @@ io.on('connection', (socket)=>{
   })
 })
 
-http.listen(3000, function () {
+http.listen(80, function () {
   console.log('Science Bowl Application running on port 80')
 });
