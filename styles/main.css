@@ -1,0 +1,24 @@
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #eeeeee;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+body, html{
+margin: 0;
+padding: 0;
+widht: 100%;
+height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.grow { transition: all .2s ease-in-out; }
