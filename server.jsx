@@ -21,7 +21,7 @@ let currentID = 0;
 
 app.post('/auth', (req, res)=>{
   const name = req.body.name;
-  players[currentID] = {name, score:0};
+  players[currentID] = { name: name.substring(0,15), score:0};
   currentID += 1;
   console.log(players)
   res.json({id: currentID-1, name})
