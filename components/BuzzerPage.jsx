@@ -36,7 +36,7 @@ class BuzzerPage extends Component {
     colconfig[WIN] = lightGreen300;
     colconfig[LOSE] = orange300;
     let temp = undefined
-    if(this.props.state.players != undefined){
+    if(this.props.state.players != undefined && this.props.state.players[this.props.state.id] != undefined){
       temp = this.props.state.players[this.props.state.id].score;
     }
     let func = this.props.state.buzzerState === RESET ? this.buzz : undefined;
