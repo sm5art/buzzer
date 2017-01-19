@@ -51,7 +51,6 @@ class Header extends Component {
             colconfig[-1] = Colors.red200;
             colconfig[0] = Colors.lightGreen300;
             colconfig[2] = Colors.orange300;
-            console.log(ele)
             let place = state.buzzers.indexOf(parseInt(ele.id));
             if(place > 0){
               place = 2

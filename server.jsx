@@ -69,6 +69,8 @@ io.on('connection', (socket)=>{
   socket.on('kick', (data)=>{
     for(let s of clients){
       if(s.player_id == data.id){
+        delete players[data.id];
+        update()
         s.emit('kick')
         break;
       }
