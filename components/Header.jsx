@@ -29,27 +29,35 @@ class Header extends Component {
     let players = []
     if(state.players != undefined){
       players = Object.keys(state.players).map(function(key) {
-    return state.players[key];
-});
+        return Object.assign({}, state.players[key], {key})
+    });
 
     }
 
     return (
     <div style={{backgroundColor: Colors.lightBlue300}}>
       <div>
-        <IconButton onTouchTap={this.handleToggle} tooltip="scores of others" touch={true} tooltipPosition="bottom-right">
+        <IconButton onTouchTap={this.handleToggle} touch={true}>
         <ReOrder color={Colors.white}/>
         </IconButton>
         <Drawer open={this.state.open}>
           <div>
-            <IconButton onTouchTap={this.handleToggle} tooltip="exit" touch={true} tooltipPosition="bottom-right">
+            <IconButton onTouchTap={this.handleToggle} touch={true}>
             <ActionInput color={Colors.grey400}/>
             </IconButton>
           </div>
           {players.map((ele)=>{
+            const colconfig = {};
+            colconfig[-1] = Colors.red200;
+            colconfig[0] = Colors.lightGreen300;
+            colconfig[2] = Colors.orange300;
+            let place = state.buzzers.indexOf(ele.id);
+            if(place > 0){
+              place = 2
+            }
             return (<MenuItem>
-              <span style={{ color: Colors.grey800}}>{ele.name}</span>
-              <span style={{paddingLeft:"50%", color: Colors.grey500}}>{ele.score}</span>
+              <span style={{ color: colconfig[place]}}>{ele.name}</span>
+              <span style={{ paddingLeft:"50%", color: Colors.grey500}}>{ele.score}</span>
             </MenuItem>)
           })}
         </Drawer>
