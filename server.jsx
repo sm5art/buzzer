@@ -93,6 +93,6 @@ io.on('connection', (socket)=>{
   })
 })
 
-http.listen(80, function () {
-  console.log('Science Bowl Application running on port 80')
+http.listen(process.env.PORT, function () {
+  console.log('Science Bowl Application running on port '+process.env.PORT)
 });
