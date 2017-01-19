@@ -10,7 +10,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ["react-hot","babel-loader"]},
+      { test: /\.jsx?$/, exclude: /node_modules/, query: {presets: ['es2015', 'react', 'stage-1']}, loader: "babel-loader"},
       {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -24,8 +24,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  },
-  eslint: {
-    configFile: './.eslintrc'
   },
 };
