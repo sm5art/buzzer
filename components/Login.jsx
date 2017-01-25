@@ -32,7 +32,7 @@ class Login extends Component {
           <TextField style={{width: "100%"}} id="playername" hintText="nickname/memename" floatingLabelText="Nickname" errorText="This field is required"/>
           <br/>
           <br/>
-          <RaisedButton onTouchTap = {this.authenticate} style={{width:'100%'}} labelColor={"#55BB72"} backgroundColor={lightBlue300}/>
+          <RaisedButton label="" onTouchTap = {this.authenticate} style={{width:'100%'}} labelColor={"#55BB72"} backgroundColor={lightBlue300}/>
         </div>
       );
     }

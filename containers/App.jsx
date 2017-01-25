@@ -28,9 +28,9 @@ class App extends Component {
     return (
       <div style={{height:"100%"}}>
         <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-          <div style={{height:"100%", display:"flex", flexFlow:"column"}}>
+          <div className="flexbox" style={{height:"100%"}}>
             <Header state={state} actions={actions}/>
-            <div style={{flex:"1", backgroundColor: Colors.grey200,paddingTop:"5%",paddingBottom:"5%"}}>
+            <div className="flex" style={{ backgroundColor: Colors.grey200,paddingTop:"5%",paddingBottom:"5%"}}>
                 {renderedChildren}
             </div>
           </div>

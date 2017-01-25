@@ -35,29 +35,27 @@ class BuzzerPage extends Component {
     colconfig[RESET] = red400;
     colconfig[WIN] = lightGreen300;
     colconfig[LOSE] = orange300;
-    let temp = undefined
+    let temp = undefined;
     if(this.props.state.players != undefined && this.props.state.players[this.props.state.id] != undefined){
       temp = this.props.state.players[this.props.state.id].score;
     }
     let func = this.props.state.buzzerState === RESET ? this.buzz : undefined;
-    return (
-      <div style={{height:"100%", display:"flex", flexFlow:"column"}}>
-        <div style={{flex:"1", padding:"15% 25%"}}>
-          <RaisedButton onTouchTap={func} className={"grow"} backgroundColor={colconfig[this.props.state.buzzerState]} style={{margin: "auto", display:"block", height:"100%", width:"100%"}}/>
+    let height = $(".flex").height()*0.9;
+    let width = $(".flex").width()*0.9;
+    return (<div style={{margin: "auto", height, width}}>
+          <RaisedButton label="" onTouchTap={func} className={"grow"} backgroundColor={colconfig[this.props.state.buzzerState]} style={{ height:"100%", width:"100%"}}/>
+
+        <div style={{bottom:"0",left:"0", position:"fixed"}}>
+          <Chip
+          backgroundColor={lightBlue300}>
+          {this.props.state.name}
+          </Chip>
         </div>
-        <div>
-          <div style={{width: "50%",verticalAlign:"top", display:"inline-block"}}>
-            <Chip
-            backgroundColor={lightBlue300}>
-            {this.props.state.name}
-            </Chip>
-          </div>
-          <div style={{width: "50%", display:"inline-block"}}>
-            <Chip style={{float:"right"}}
-            backgroundColor={lightBlue300}>
-            {temp}
-            </Chip>
-          </div>
+        <div style={{bottom:"0",right:"0", position:"fixed"}}>
+          <Chip style={{float:"right"}}
+          backgroundColor={lightBlue300}>
+          {temp}
+          </Chip>
         </div>
       </div>
       );
