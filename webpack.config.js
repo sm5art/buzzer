@@ -10,9 +10,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, query: {presets: [require.resolve('babel-preset-es2015'),
-        require.resolve('babel-preset-react'),
-        require.resolve('babel-preset-stage-1')]}, loader: "babel"},
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"},
       {
         test: /\.css$/,
         exclude: /node_modules/,
