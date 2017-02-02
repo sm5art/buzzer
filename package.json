@@ -1,7 +1,7 @@
 {
   "name": "buzzer",
   "version": "1.0.0",
-  "description": "A boilerplate for React + Redux + Material UI + ES6 syntax applications. This boilerplate includes following tools and frameworks.",
+  "description": "Buzzer app for california high school science bowl",
   "main": "server.js",
   "dependencies": {
     "assets-webpack-plugin": "^3.2.0",
