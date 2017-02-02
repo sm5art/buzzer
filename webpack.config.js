@@ -1,4 +1,3 @@
-var path = require('path')
 module.exports = {
   context: __dirname,
   entry: {
@@ -11,7 +10,9 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, query: {presets: [['es2015'], ['react'], ['stage-1']]}, loader: "babel-loader"},
+      { test: /\.jsx?$/, exclude: /node_modules/, query: {presets: [require.resolve('babel-preset-es2015'),
+        require.resolve('babel-preset-react'),
+        require.resolve('babel-preset-stage-1')]}, loader: "babel"},
       {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -26,7 +27,4 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
-  }
 };

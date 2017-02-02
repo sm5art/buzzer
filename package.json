@@ -5,12 +5,10 @@
   "main": "server.js",
   "dependencies": {
     "assets-webpack-plugin": "^3.2.0",
-    "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.3.14",
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.5.1",
     "bluebird": "^2.10.0",
-    "body-parser": "^1.16.0",
     "compression": "^1.6.0",
     "css-loader": "^0.26.1",
     "ejs": "^2.3.4",
@@ -36,10 +34,8 @@
     "redux-thunk": "^0.1.0",
     "rewire": "^2.3.4",
     "run-sequence": "^1.2.2",
-    "socket.io": "^1.7.2",
     "style-loader": "^0.13.1",
-    "superagent": "^1.4.0",
-    "webpack": "^1.14.0"
+    "superagent": "^1.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.15",
@@ -83,13 +79,6 @@
   },
   "engines": {
     "node": "6.6.0"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react",
-      "stage-1"
-    ]
   },
   "author": "",
   "license": "ISC"
