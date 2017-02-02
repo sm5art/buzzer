@@ -43,11 +43,10 @@ class BuzzerPage extends Component {
     if(this.props.state.buzzerState == RESET){
       $("#buzzerButton").prop('disabled', false)
     }
-    let func = this.props.state.buzzerState === RESET ? this.buzz : undefined;
     let height = $(".flex").height()*0.9;
     let width = $(".flex").width()*0.9;
     return (<div style={{margin: "auto", height, width}}>
-          <RaisedButton id="buzzerButton" label="" onTouchTap={func} className={"grow"} backgroundColor={colconfig[this.props.state.buzzerState]} style={{ height:"100%", width:"100%"}}/>
+          <RaisedButton id="buzzerButton" label="" onTouchTap={this.buzz} className={"grow"} backgroundColor={colconfig[this.props.state.buzzerState]} style={{ height:"100%", width:"100%"}}/>
 
         <div style={{bottom:"0",left:"0", position:"fixed"}}>
           <Chip
