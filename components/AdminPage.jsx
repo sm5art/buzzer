@@ -22,6 +22,7 @@ class NamePlate extends Component {
     this.kick = this.kick.bind(this)
     this.addNPoints = this.addNPoints.bind(this)
     this.add10Points = this.add10Points.bind(this)
+    this.updateValue = this.updateValue.bind(this)
   }
 
   addPoints(amount){
@@ -42,11 +43,16 @@ class NamePlate extends Component {
   }
 
   addNPoints(){
-    let value = $('#amount').val()
+    let value = this.textValue
     if(value == "" || value == undefined){
       value = 0;
     }
+    console.log( parseInt(value))
     this.addPoints(value)
+  }
+
+  updateValue(object, string){
+    this.textValue = string;
   }
 
   render(){
@@ -64,6 +70,7 @@ class NamePlate extends Component {
         <FlatButton onTouchTap={this.add4Points} label="+4" primary={true} />
         <FlatButton onTouchTap={this.add10Points} label="+10" secondary={true} />
         <TextField
+          onChange = {this.updateValue}
           style={{marginRight: "4px", width:"35px"}}
           id="amount"
         />

@@ -28,7 +28,7 @@ class BuzzerPage extends Component {
 
   buzz(){
     this.props.actions.send_buzzer(this.props.state.id);
-    $("#buzzerButton").prop('disabled', true)
+    this.disabled = true;
   }
 
   render(){
@@ -41,12 +41,12 @@ class BuzzerPage extends Component {
       temp = this.props.state.players[this.props.state.id].score;
     }
     if(this.props.state.buzzerState == RESET){
-      $("#buzzerButton").prop('disabled', false)
+      this.disabled = false;
     }
     let height = $(".flex").height()*0.9;
     let width = $(".flex").width()*0.9;
     return (<div style={{margin: "auto", height, width}}>
-          <RaisedButton id="buzzerButton" label="" onTouchTap={this.buzz} className={"grow"} backgroundColor={colconfig[this.props.state.buzzerState]} style={{ height:"100%", width:"100%"}}/>
+          <RaisedButton disabled={this.disabled} label="" onTouchTap={this.buzz} className={"grow"} disabledBackgroundColor={colconfig[this.props.state.buzzerState]} backgroundColor={colconfig[this.props.state.buzzerState]} style={{ height:"100%", width:"100%"}}/>
 
         <div style={{bottom:"0",left:"0", position:"fixed"}}>
           <Chip
