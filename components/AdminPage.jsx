@@ -105,6 +105,7 @@ class AdminPage extends Component {
   constructor(props, context){
     super(props, context);
     this.reset = this.reset.bind(this);
+    this.destroy = this.destroy.bind(this)
   }
 
   componentDidMount(){
@@ -115,6 +116,10 @@ class AdminPage extends Component {
     this.props.actions.reset();
   }
 
+  destroy(){
+    socket.emit('kickall')
+  }
+
   render(){
     const {state, actions} = this.props;
     if(state.players != undefined){
@@ -122,7 +127,7 @@ class AdminPage extends Component {
       return (
         <div>
           <div>
-            <RaisedButton onTouchTap={this.reset} label="Reset" primary={true}/>
+            <RaisedButton onTouchTap={this.reset} label="Reset" primary={true}/><RaisedButton onTouchTap={this.destroy} label="Destroy all players" secondary={true}/>
           </div>
           {ids.map((id)=>{
             return <NamePlate id={id} name={state.players[id].name} score={state.players[id].score} state={state} actions={actions}/>

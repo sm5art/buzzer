@@ -1,6 +1,9 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
+
 
 var app = express();
 var http = require('http').Server(app);
@@ -10,6 +13,7 @@ var io = require('socket.io')(http);
 app.use('/static', express.static('static'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(cookieParser());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,17 +25,28 @@ let currentID = 0;
 
 app.post('/auth', (req, res)=>{
   const name = req.body.name;
-  players[currentID] = { name: name.substring(0,15), score:0};
+  players[currentID] = { name: name.substring(0,30), score:0};
   currentID += 1;
-  console.log(players)
+  res.cookie("auth", JSON.stringify({id: currentID-1, name}))
   res.json({id: currentID-1, name})
 });
+
+app.get('/logout', (req, res)=>{
+  console.log(req.cookies.auth)
+  if(req.cookies.auth != undefined){
+    delete players[JSON.parse(req.cookies.auth).id]
+    update()
+    res.clearCookie('auth')
+  }
+  res.redirect("/")
+})
 
 app.get('*', (req, res)=>{
   res.render('index.ejs')
 });
 
 function update(){
+  console.log(players, buzzList)
   clients.map((socket)=>{
     socket.emit('update', {players, buzzers: buzzList})
   })
@@ -47,14 +62,7 @@ io.on('connection', (socket)=>{
   console.log('A player has loaded buzzerapp')
   clients.push(socket)
   socket.on('disconnect', ()=>{
-    if(socket.player_id != undefined){
-      delete players[socket.player_id];
-      console.log(`Player id: ${socket.player_id} has disconnected. Destroying player from game.`)
-    }
     clients.splice(clients.indexOf(socket), 1);
-    if(socket.player_id != undefined){
-      update()
-    }
   })
 
   socket.on('init', ()=>{
@@ -76,6 +84,13 @@ io.on('connection', (socket)=>{
       }
     }
   })
+  socket.on('kickall', ()=>{
+    for(let s of clients){
+      s.emit('kick')
+    }
+    players = {}
+    buzzList = []
+  })
 
   socket.on('update', (data)=>{
     players[data.id]["score"] += parseInt(data.score);
@@ -83,9 +98,11 @@ io.on('connection', (socket)=>{
   })
 
   socket.on('buzz', (data)=>{
-    buzzList.push(data.id)
-    socket.emit('buzz', {ranking:buzzList.length})
-    update()
+    if(buzzList.indexOf(data.id) == -1 && players[data.id] != undefined){
+      buzzList.push(data.id);
+      socket.emit('buzz', {ranking:buzzList.length});
+      update();
+    }
   })
 
   socket.on('reset', ()=>{

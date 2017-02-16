@@ -37,10 +37,6 @@ socket.on('buzz', (data)=>{
   store.dispatch(action_types.recieved_buzz(data.ranking))
 })
 
-socket.on('kick', (data)=>{
-  window.location = '/'
-})
-
 socket.on('reset', ()=>{
   store.dispatch(action_types.reset_buzzer())
 })

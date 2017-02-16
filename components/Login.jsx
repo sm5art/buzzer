@@ -10,6 +10,16 @@ class Login extends Component {
   constructor(props, context){
     super(props, context)
     this.authenticate = this.authenticate.bind(this)
+    this.getCookie = this.getCookie.bind(this)
+    this.disabled = false
+  }
+
+  componentDidMount(){
+    if(this.getCookie('auth')!= ""){
+      const auth = JSON.parse(this.getCookie('auth'));
+      socket.emit('auth',{id: auth.id})
+      this.props.actions.auth(auth);
+    }
   }
 
   componentDidUpdate(){
@@ -18,11 +28,26 @@ class Login extends Component {
         browserHistory.push('/play');
     }
   }
+  getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
   authenticate(){
     this.props.actions.dispatch_auth($("#playername").val())
     console.log('pressed')
-    this.authenticate = undefined
+    this.disabled = true
   }
 
   render(){
@@ -32,7 +57,7 @@ class Login extends Component {
           <TextField style={{width: "100%"}} id="playername" hintText="nickname/memename" floatingLabelText="Nickname" errorText="This field is required"/>
           <br/>
           <br/>
-          <RaisedButton label="" onTouchTap = {this.authenticate} style={{width:'100%'}} labelColor={"#55BB72"} backgroundColor={lightBlue300}/>
+          <RaisedButton disabled={this.disabled} label="" onTouchTap = {this.authenticate} style={{width:'100%'}} labelColor={"#55BB72"} backgroundColor={lightBlue300}/>
         </div>
       );
     }
